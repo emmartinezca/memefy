@@ -26,3 +26,5 @@ Route::post('/users/validate/email','UserController@validateEmail');
 Route::resource('users','UserController');
 
 Route::resource('posts','PostController');
+
+Route::resource('likes','LikeController');

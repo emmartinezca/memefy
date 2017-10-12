@@ -1,4 +1,4 @@
-var app = angular.module('memefyApp',['ui.router','satellizer','ngAnimate','ngMessages','ngCookies','ui.bootstrap','ngFileUpload','ngImgCrop','remoteValidation']);
+var app = angular.module('memefyApp',['ui.router','satellizer','ngAnimate','ngMessages','ngCookies','ui.bootstrap','ngFileUpload','ngImgCrop','remoteValidation','toastr']);
 app.config(function($stateProvider, $urlRouterProvider, $authProvider) {
 
     $authProvider.loginUrl = '/api/authenticate';
@@ -100,7 +100,7 @@ app.controller('AuthController', function($scope, $auth, $state, $rootScope, $ht
     $scope.getProfile = function() {
         $http.get('/api/me/data')
         .then(function(data) {
-            $scope.user = data.data.user;
+            $rootScope.user = data.data.user;
             //console.log(data.data.user);
         })
         .catch(function(error) {
@@ -120,11 +120,11 @@ app.controller('AuthController', function($scope, $auth, $state, $rootScope, $ht
                 $scope.getProfile();
                 $scope.isNavCollapsed = true;
                 $state.go('memefy',{});
-                //toaster.success({title: 'Bienvenido', body: $scope.user});
+                toastr.success('You\'re now logged in', 'Welcome!');
             })
             .catch(function(error) {
                 if(error.status == 401) {
-                    //toaster.error({title: 'Error', body: 'El usuario o la contraseña son incorrectos'});
+                    toastr.error('Seems like the email or password are incorrect', 'Oh no!');
                 }
             });
     };
@@ -138,7 +138,7 @@ app.controller('AuthController', function($scope, $auth, $state, $rootScope, $ht
     }
 });
 
-app.controller('MemefyController', function($scope, $auth, $state, $http, Upload, $timeout) {
+app.controller('MemefyController', function($scope, $auth, $state, $http, Upload, $timeout, $filter, $rootScope) {
     var getPosts = function() {
         $http.get('/api/posts')
         .then(function(data) {
@@ -150,8 +150,42 @@ app.controller('MemefyController', function($scope, $auth, $state, $http, Upload
         });
     };
 
-    $scope.likes = function(postId) {
-        
+    $scope.likePost = function(postId,userLiked) {
+        if(userLiked) {
+            $http.delete('api/likes/'+postId)
+            .then(function(response) {
+                getPosts();
+            })
+            .catch(function(error) {
+
+            });
+        }
+        else {
+            data = {
+                user_id: $rootScope.user.id,
+                post_id: postId
+            };
+            $http.post('api/likes',data)
+            .then(function(response) {
+                getPosts();
+            })
+            .catch(function(error) {
+
+            });
+        }
+    };
+
+    $scope.userLikedPost = function(post) {
+        if(post.likes.length > 0) {
+            var newTemp = $filter("filter")(post.likes, {user_id: $rootScope.user.id});
+            console.log(newTemp);
+            if(newTemp.length > 0) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
     };
 
     $scope.createPost = function(file) {

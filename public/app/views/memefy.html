@@ -42,11 +42,13 @@
             <div class="panel-body">
                 {{ post.content }}
                 <div ng-if="post.photos.length > 0">
-                    <img ng-repeat="photo in post.photos track by $index" ng-src="/storage/{{ photo.filename }}" class="img-responsive img-rounded">
+                    <img ng-repeat="photo in post.photos track by $index" ng-src="/storage/{{ photo.filename }}" class="img-responsive img-rounded post-img">
                 </div>
                 <div class="row">
                     <div class="btn-group col-sm-3">
-                        <button class="btn btn-default btn-social" type="button" ng-click="like(post.id)"><i class="fa fa-fw fa-heart"></i></button>
+                        <button class="btn btn-default btn-social" type="button" ng-click="likePost(post.id,userLikedPost(post))" >
+                            <i class="fa fa-fw fa-heart" ng-class="{ 'liked': userLikedPost(post) }"></i> <span ng-if="post.likes.length > 0">{{ post.likes.length }}</span>
+                        </button>
                         <button class="btn btn-default btn-social" type="button"><i class="fa fa-fw fa-like"></i></button>
                         <button class="btn btn-default btn-social" type="button"><i class="fa fa-fw fa-like"></i></button>
                     </div>

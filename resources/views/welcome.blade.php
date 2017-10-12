@@ -10,20 +10,36 @@
         <!-- Styles -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/angular-toastr@2/dist/angular-toastr.css">
         <link href="css/ng-img-crop.min.css" rel="stylesheet" type="text/css">
         <style>
             body, html {
                 height: 100%;
                 font-family: 'Nunito', sans-serif;
             }
+            /*body:before {
+                content: "";
+                display: block;
+                position: fixed;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                z-index: -10;
+                background: url(img/meme-bg.png) no-repeat center center;
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover;
+            }*/
             body {
                 padding-top: 65px;
                 margin: 0;
-                background-image: url('/img/meme-bg.png');
+                /*background-image: url('/img/meme-bg.png');
                 background-size: cover;
                 background-position: center;
                 background-repeat: no-repeat;
-                background-attachment: fixed;
+                background-attachment: fixed;*/
             }
             .panel-default {
                 /*opacity: .9;*/
@@ -138,6 +154,14 @@
                 background-position: center;
                 background-repeat: no-repeat;
             }
+            .post-img {
+                margin-left: auto;
+                margin-right: auto;
+                max-width: 80%;
+            }
+            .liked {
+                color: #f4425c;
+            }
         </style>
     </head>
     <body ng-app="memefyApp" ng-controller="AuthController" >
@@ -207,6 +231,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.3/angular-ui-router.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/satellizer/0.14.1/satellizer.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/angular-toastr@2/dist/angular-toastr.tpls.js"></script>
         <script src="js/ng-file-upload.min.js"></script>
         <script src="js/ng-file-upload-shim.min.js"></script>
         <script src="js/ng-img-crop.min.js"></script>
