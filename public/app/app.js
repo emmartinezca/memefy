@@ -63,6 +63,14 @@ app.config(function($stateProvider, $urlRouterProvider, $authProvider) {
                 skipIfLoggedIn: skipIfLoggedIn
             }
         })
+        .state('passwordForgot', {
+            url: '/forgot-password',
+            templateUrl: 'app/views/password-forgot.html',
+            controller: 'PasswordForgotController as PasswordForgot',
+            resolve: {
+                skipIfLoggedIn: skipIfLoggedIn
+            }
+        })
         .state('logout', {
             url: '/logout',
             templateUrl: null,
@@ -142,7 +150,7 @@ app.controller('MemefyController', function($scope, $auth, $state, $http, Upload
         });
     };
 
-    $scope.likePost = function(postId) {
+    $scope.likes = function(postId) {
         
     };
 
@@ -222,7 +230,11 @@ app.controller('RegisterController', function($scope, $http, $auth, $state, Uplo
                 $scope.progress = parseInt(100.0 * evt.loaded / evt.total);
             });
         }
+    };
+});
 
+app.controller('PasswordForgotController', function() {
+    $scope.recoverPassword = function() {
     };
 });
 

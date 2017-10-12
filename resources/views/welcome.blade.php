@@ -19,6 +19,9 @@
             body {
                 padding-top: 65px;
                 margin: 0;
+                background-image: url('/img/meme-bg.png');
+                background-size: cover;
+                background-position: center;
                 background-repeat: no-repeat;
                 background-attachment: fixed;
             }
@@ -126,10 +129,14 @@
                 display: block;
             }
             .cropArea {
-                background: #E4E4E4;
+                background: #fff;
                 overflow: hidden;
                 width:250px;
                 height:200px;
+                background-image: url('/img/add-file.jpg');
+                background-size: 75px;
+                background-position: center;
+                background-repeat: no-repeat;
             }
         </style>
     </head>
@@ -161,20 +168,20 @@
                                                 <div class="form-group">
                                                     <label class="sr-only" for="exampleInputPassword2">Password</label>
                                                     <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" ng-model="login.password" required>
-                                                    <div class="help-block text-right"><a href="">Forget the password ?</a></div>
+                                                    <!--div class="help-block text-right"><a href="">Forget the password ?</a></div-->
                                                 </div>
                                                 <div class="form-group">
                                                     <button type="submit" class="btn btn-primary btn-block">Sign in</button>
                                                 </div>
-                                                <div class="checkbox">
+                                                <!--div class="checkbox">
                                                     <label>
                                                         <input type="checkbox"> keep me logged-in
                                                     </label>
-                                                </div>
+                                                </div-->
                                             </form>
                                         </div>
                                         <div class="bottom text-center">
-                                            New here ? <a href="#"><b>Join Us</b></a>
+                                            New here ? <a href="/#!/register"><b>Join Us</b></a>
                                         </div>
                                     </div>
                                 </li>

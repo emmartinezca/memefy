@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Post;
 use App\Photo;
+use App\Video;
+use App\Like;
+use App\Comment;
 
 class PostController extends Controller
 {
@@ -21,7 +24,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::orderBy('created_at','desc')->with('user')->with('photos')->get();
+        $posts = Post::orderBy('created_at','desc')->with('user')->with('photos')->with('videos')->with('comments')->with('likes')->get();
 
         return response()->json($posts);
     }
