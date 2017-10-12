@@ -1,0 +1,72 @@
+<div class="row">
+    <div class="col-md-6 col-md-offset-3" style="padding-top:5%;">
+        <div class="panel panel-default">
+            <div class="panel-heading" ng-style="color">
+                <div class="panel-title">Create an account</div>
+            </div>
+            <div class="panel-body">
+                <form name="registerForm" class="form-horizontal" ng-submit="register(registerForm.$valid)" novalidate>
+                    <div class="form-group" ng-class="{ 'has-error': submitted && registerForm.name.$invalid }">
+                        <label class="control-label col-sm-2" for="">name*:</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" type="text" name="name" ng-model="regData.name" required>
+                            <div class="help-block" ng-messages="registerForm.name.$error" ng-show="submitted && registerForm.name.$invalid">
+                                <p ng-message="required">Your name is required.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{ 'has-error': submitted && registerForm.email.$invalid }">
+                        <label class="control-label col-sm-2" for="">email*:</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" type="email" name="email" ng-model="regData.email" autocomplete="off" ng-remote-validate="/api/users/validate/email" required>
+                            <div class="help-block" ng-messages="registerForm.email.$error" ng-show="submitted && registerForm.email.$invalid">
+                                <p ng-message="required">Your email is required.</p>
+                                <p ng-message="email">Enter a valid email address.</p>
+                                <p ng-message="ngRemoteValidate">This email is already taken.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{ 'has-error': submitted && registerForm.password.$invalid }">
+                        <label class="control-label col-sm-2" for="">password*:</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" type="password" name="password" ng-model="regData.password" required>
+                            <div class="help-block" ng-messages="registerForm.password.$error" ng-show="submitted && registerForm.password.$invalid">
+                                <p ng-message="required">You must enter a password.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{ 'has-error': submitted && registerForm.password_confirm.$invalid }">
+                        <label class="control-label col-sm-2" for="">confirm password*:</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" type="password" name="password_confirm" ng-model="regData.password_confirm" required>
+                            <div class="help-block" ng-messages="registerForm.password_confirm.$error" ng-show="submitted && registerForm.password_confirm.$invalid">
+                                <p ng-message="required">You must re enter your password.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">profile pic:</label>
+                        <div class="sol-sm-10">
+                            <!--label class="btn btn-default btn-file" style="top:10px;left:5%;border:0;">
+                                <i class="fa fa-fw fa-camera"></i><input type="file" ngf-select ng-model="regData.picture" name="file"
+                                accept="image/*" ngf-max-size="2MB" required
+                                ngf-model-invalid="errorFile">
+                            </label-->
+                            <div ngf-drop ng-model="regData.picture" ngf-pattern="image/*" class="cropArea">
+                                <img-crop image="regData.picture  | ngfDataUrl" result-image="croppedDataUrl" ng-init="croppedDataUrl=''"></img-crop>
+                            </div>
+                            <!--div>
+                                <img ng-src="{{croppedDataUrl}}" />
+                            </div-->
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-primary">Register</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
