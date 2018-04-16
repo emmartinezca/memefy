@@ -15,15 +15,8 @@ class UsersTableSeeder extends Seeder
         User::create([
             'name'     => 'Emmanuel Martínez',
             'email'    => 'emmartinezca@gmail.com',
-            'password' => bcrypt('greenpnd'),
+            'password' => bcrypt('webos1'),
             'image'    => 'shamed.png'
-        ]);
-
-        User::create([
-            'name'     => 'Maribel Aguilar',
-            'email'    => 'maribel.aguilar@gmail.com',
-            'password' => bcrypt('greenpnd'),
-            'image'    => 'maribel.png'
         ]);
     }
 }
